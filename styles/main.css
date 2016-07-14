@@ -36,7 +36,9 @@ body {
     height: 100px;
     color: white;
     text-decoration: none;
+
 }
+
 
 .links-container .navbar-link {
     display: table-cell;
@@ -57,6 +59,15 @@ body {
 .links-container .navbar-link:hover {
     color: rgb(233,50,117);
 }
+
+.links-container:active {
+    background-color: white
+}
+
+.links-container .navbar-link:active {
+    color: rgb(233,50,117);
+}
+
 .container {
     margin: 0 auto;
     max-width: 64rem;
