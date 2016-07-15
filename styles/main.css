@@ -57,9 +57,14 @@ body {
 .links-container .navbar-link:hover {
     color: rgb(233,50,117);
 }
+
 .container {
     margin: 0 auto;
     max-width: 64rem;
+}
+
+.container.narrow {
+    max-width: 56rem;
 }
 
 .clearfix::before,
@@ -71,18 +76,17 @@ body {
 .clearfix::after {
     clear: both;
 }
-
 /*media queries*/
-
 /* Medium and small screens (640px) */
 @media (min-width: 640px) {
   html {
     font-size: 112%;
   }
-  .column {
-      float: left;
-      padding-left: 1rem;
-      padding-right: 1rem;
+
+.column {
+    float: left;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
   .column.full { width: 100%; }
