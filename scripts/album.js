@@ -99,7 +99,9 @@ window.onload = function() {
       if (currentParent.className === null){
         alert("No parent found")
       } else if (currentParent.className != targetClass && currentParent.className != null){
-        currentParent = currentParent.parentElement;
+          while (currentParent.className != targetClass && currentParent.className != null){
+            currentParent = currentParent.parentElement;
+          }
       } else if (currentParent.className != targetClass && currentParent.className === null){
         alert("No parent found with that className")
       } return currentParent;
