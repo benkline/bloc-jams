@@ -167,7 +167,7 @@ var previousSong = function() {
   currentSoundFile.play();
   currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
 
-// I was maybe supposed to re-factor these currently-playing selectors out with a call to updatePlayerBarSong?
+// maybe I was supposed to re-factor these currently-playing selectors out with a call to updatePlayerBarSong?
 
   $('.currently-playing .song-name').text(currentSongFromAlbum.title);
   $('.currently-playing .artist-name').text(currentAlbum.artist);
@@ -183,6 +183,18 @@ var previousSong = function() {
 
 };
 
+var togglePlayFromPlayerBar = function(){
+  if (currentSoundFile.isPaused()) {
+    $('.main-controls .play-pause').html(playerBarPauseButton);
+    $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]').html(pauseButtonTemplate);
+    currentSoundFile.play();
+  } else {
+    $('.main-controls .play-pause').html(playerBarPlayButton);
+    $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]').html(playButtonTemplate);
+    currentSoundFile.pause();
+  }
+};
+
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 var playerBarPlayButton = '<span class="ion-play"></span>';
@@ -196,10 +208,11 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
-
+var $playpauseButton = $('.main-controls .play-pause');
 
 $(document).ready(function() {
   setCurrentAlbum(albumPicasso);
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
+  $playpauseButton.click(togglePlayFromPlayerBar);
 });
