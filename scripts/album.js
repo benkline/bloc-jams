@@ -34,7 +34,7 @@ var createSongRow = function(songNumber, songName, songLength) {
        '<tr class="album-view-song-item">'
      + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
      + '  <td class="song-item-title">' + songName + '</td>'
-     + '  <td class="song-item-duration">' + songLength + '</td>'
+     + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
      + '</tr>'
      ;
 
@@ -120,10 +120,17 @@ var updateSeekBarWhileSongPlays = function() {
         currentSoundFile.bind('timeupdate', function(event) {
             var seekBarFillRatio = this.getTime() / this.getDuration();
             var $seekBar = $('.seek-control .seek-bar');
+            var currentTime = filterTimeCode(currentSoundFile.getTime());
 
             updateSeekPercentage($seekBar, seekBarFillRatio);
+            setCurrentTimeInPlayerBar(currentTime);
         });
     }
+
+};
+
+var setCurrentTimeInPlayerBar = function(currentTime){
+    $('.current-time').text(currentTime);
 };
 
 var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
@@ -180,11 +187,21 @@ var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 };
 
+// var setTotalTimeInPlayerBar = function(totalTime){
+//   if (currentSoundFile) {
+//     var totalTime = currentSongFromAlbum.duration;
+//   };
+//
+//   return $('.total-time').text(total-time);
+// }
+
 var updatePlayerBarSong = function(){
   $('.currently-playing .song-name').text(currentSongFromAlbum.title);
   $('.currently-playing .artist-name').text(currentAlbum.artist);
   $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
   $('.main-controls .play-pause').html(playerBarPauseButton);
+  // setTotalTimeInPlayerBar(totalTime);
+  $('.total-time').text(filterTimeCode(currentSongFromAlbum.duration));
 };
 
 
@@ -264,6 +281,14 @@ var currentVolume = 80;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
+
+var filterTimeCode = function(timeInSeconds){
+  if (timeInSeconds > 10){
+      return Math.floor(parseFloat(timeInSeconds)/60) + ":" + Math.floor(parseFloat(timeInSeconds))%60;
+  } else {
+      return Math.floor(parseFloat(timeInSeconds)/60) + ":0" + Math.floor(parseFloat(timeInSeconds))%60;
+  }
+};
 
 $(document).ready(function() {
   setCurrentAlbum(albumPicasso);
