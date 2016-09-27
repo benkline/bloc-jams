@@ -218,9 +218,10 @@ var nextSong = function() {
       currentSongIndex = 0;
   }
 
-  setSong(songNumber);
+  //setSong(songNumber);
   currentSoundFile.play();
   updateSeekBarWhileSongPlays();
+  currentlyPlayingSongNumber = currentSongIndex + 1;
   currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
 
   $('.currently-playing .song-name').text(currentSongFromAlbum.title);
@@ -248,9 +249,10 @@ var previousSong = function() {
     currentSongIndex = currentAlbum.songs.length - 1;
   }
 
-  setSong(songNumber);
+  //setSong(songNumber);
   currentSoundFile.play();
   updateSeekBarWhileSongPlays();
+  currentlyPlayingSongNumber = currentSongIndex + 1;
   currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
 
   $('.currently-playing .song-name').text(currentSongFromAlbum.title);
